@@ -1,233 +1,206 @@
-# Ex04 Simple Calculator - React Project
-## Date: 01-10-2025
-# Register Number:212223220015
+## Ex04 Simple Calculator - React Project
 
 ## AIM
-To  develop a Simple Calculator using React.js with clean and responsive design, ensuring a smooth user experience across different screen sizes.
+To develop a Simple Calculator using React.js with clean and responsive design, ensuring a smooth user experience across different screen sizes.
 
 ## ALGORITHM
-### STEP 1
+STEP 1
 Create a React App.
 
-### STEP 2
+STEP 2
 Open a terminal and run:
-  <ul><li>npx create-react-app simple-calculator</li>
-  <li>cd simple-calculator</li>
-  <li>npm start</li></ul>
 
-### STEP 3
+npx create-react-app simple-calculator
+cd simple-calculator
+npm start
+STEP 3
 Inside the src/ folder, create a new file Calculator.js and define the basic structure.
 
-### STEP 4
+STEP 4
 Plan the UI: Display screen, number buttons (0-9), operators (+, -, *, /), clear (C), and equal (=).
 
-### STEP 5
+STEP 5
 Create a new file Calculator.css in src/ and add the styling.
 
-### STEP 6
+STEP 6
 Open src/App.js and modify it.
 
-### STEP 7
-Start the development server.
-  npm start
+STEP 7
+Start the development server. npm start
 
-### STEP 8
+STEP 8
 Open http://localhost:3000/ in the browser.
 
-### STEP 9
+STEP 9
 Test the calculator by entering numbers and operations.
 
-### STEP 10
+STEP 10
 Fix styling issues and refine content placement.
 
-### STEP 11
+STEP 11
 Deploy the website.
 
-### STEP 12
+STEP 12
 Upload to GitHub Pages for free hosting.
 
 ## PROGRAM
-App.jsx
+Index.html
 ```
-import React, { useState } from "react";
-import "./App.css";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Glass Calculator</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
 
+<div class="calculator">
+  <input type="text" id="display" disabled placeholder="0">
 
-function App() {
-  const [input, setInput] = useState("");
-  const [result, setResult] = useState("");
+  <div class="buttons">
+    <button onclick="clearDisplay()">C</button>
+    <button onclick="deleteLast()">DEL</button>
+    <button onclick="append('%')">%</button>
+    <button onclick="append('/')">/</button>
 
-  const handleClick = (value) => {
-    setInput((prev) => prev + value);
-  };
+    <button onclick="append('7')">7</button>
+    <button onclick="append('8')">8</button>
+    <button onclick="append('9')">9</button>
+    <button onclick="append('*')">*</button>
 
-  const handleClear = () => {
-    setInput("");
-    setResult("");
-  };
+    <button onclick="append('4')">4</button>
+    <button onclick="append('5')">5</button>
+    <button onclick="append('6')">6</button>
+    <button onclick="append('-')">-</button>
 
-  const handleCalculate = () => {
-    try {
-      const evalResult = eval(input); 
-      setResult(evalResult.toString());
-    } catch {
-      setResult("Error");
-    }
-  };
+    <button onclick="append('1')">1</button>
+    <button onclick="append('2')">2</button>
+    <button onclick="append('3')">3</button>
+    <button onclick="append('+')">+</button>
 
-  return (
-    <div className="calculator-container">
-      <h1>Calculator Using React</h1>
-      
+    <button onclick="append('0')">0</button>
+    <button onclick="append('.')">.</button>
+    <button class="equal" onclick="calculate()">=</button>
+  </div>
+</div>
 
-      <div className="calculator">
-        <div className="display-box">
-          <input type="text" value={input} readOnly className="display" />
-          {result && <div className="result">= {result}</div>}
-        </div>
-
-        <div className="buttons">
-          <button onClick={() => handleClick("7")}>7</button>
-          <button onClick={() => handleClick("8")}>8</button>
-          <button onClick={() => handleClick("9")}>9</button>
-          <button onClick={() => handleClick("/")}>÷</button>
-
-          <button onClick={() => handleClick("4")}>4</button>
-          <button onClick={() => handleClick("5")}>5</button>
-          <button onClick={() => handleClick("6")}>6</button>
-          <button onClick={() => handleClick("*")}>×</button>
-
-          <button onClick={() => handleClick("1")}>1</button>
-          <button onClick={() => handleClick("2")}>2</button>
-          <button onClick={() => handleClick("3")}>3</button>
-          <button onClick={() => handleClick("-")}>−</button>
-
-          <button onClick={() => handleClick("0")}>0</button>
-          <button onClick={() => handleClick(".")}>.</button>
-          <button onClick={handleCalculate}>=</button>
-          <button onClick={() => handleClick("+")}>+</button>
-
-          <button className="clear" onClick={handleClear}>
-            Clear
-          </button>
-        </div>
-      </div>
-     
-    </div>
-    
-  );
-}
-
-export default App;
+<script src="index.js"></script>
+</body>
+</html>
 
 ```
-App.css
+Index.css
 ```
-
-body{
-  background-image:url('./assets/gradient.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-.calculator-container {
-  text-align: center;
-  margin: 150px;
-  font-family: Arial, sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-h2 {
-  margin-bottom: 5px;
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fad0c4);
 }
-
-p {
-  font-size: 14px;
-  margin: 3px 0;
-}
-
 
 .calculator {
-  background: #f5f5f5;
-  width: 300px;
-  margin: 20px auto;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.15);
+  padding: 25px;
+  border-radius: 20px;
+  width: 320px;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
 
-.display-box {
-  text-align: right;
-  margin-bottom: 15px;
-}
-
-.display {
+#display {
   width: 100%;
-  height: 50px;
-  font-size: 20px;
+  height: 60px;
+  font-size: 26px;
   text-align: right;
   padding: 10px;
+  border-radius: 12px;
   border: none;
-  border-radius: 6px;
-  background:white;
-  box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.result {
-  margin-top: 5px;
-  font-size: 18px;
+  margin-bottom: 20px;
+  background: rgba(255,255,255,0.2);
+  color: #222;
   font-weight: bold;
-  color: #333;
 }
 
 .buttons {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  gap: 12px;
 }
 
 button {
-  padding: 15px;
+  padding: 18px;
   font-size: 18px;
   border: none;
-  border-radius: 8px;
-  background: salmon;
-  color: white;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.25);
+  color: #222;
   cursor: pointer;
-  transition: background 0.3s;
+  backdrop-filter: blur(8px);
+  transition: all 0.2s ease-in-out;
 }
 
 button:hover {
-  background: grey;
+  background: rgba(255,255,255,0.4);
+  transform: translateY(-2px);
 }
 
-button.clear {
-  grid-column: span 4;
-  background: black;
+.equal {
+  grid-column: span 2;
+  background: #ff6f61;
+  color: #fff;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(255,111,97,0.5);
 }
 
-button.clear:hover {
-  background: gray;
-}
-
-
-@media (max-width: 400px) {
-  .calculator {
-    width: 90%;
-  }
-
-  button {
-    padding: 12px;
-    font-size: 16px;
-  }
+.equal:hover {
+  background: #ff5a4b;
 }
 
 ```
 
 
+Index.js
+
+```
+function append(value) {
+  document.getElementById('display').value += value;
+}
+
+function clearDisplay() {
+  document.getElementById('display').value = '';
+}
+
+function deleteLast() {
+  const current = document.getElementById('display').value;
+  document.getElementById('display').value = current.slice(0, -1);
+}
+
+function calculate() {
+  try {
+    document.getElementById('display').value = eval(document.getElementById('display').value);
+  } catch (error) {
+    document.getElementById('display').value = 'Error';
+  }
+}
+
+```
+  
+
+
 ## OUTPUT
 
-<img width="1017" height="462" alt="image" src="https://github.com/user-attachments/assets/c5580bea-e3e7-4efa-aee9-1c9aced22ed8" />
-
+<img width="1268" height="634" alt="Screenshot 2025-10-30 093802" src="https://github.com/user-attachments/assets/64a212dc-a4d8-4013-b2fa-61789221addb" />
 
 
 ## RESULT
